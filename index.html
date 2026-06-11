@@ -217,6 +217,18 @@
   .a1 { animation-delay: 0.05s; } .a2 { animation-delay: 0.13s; } .a3 { animation-delay: 0.21s; }
   .a4 { animation-delay: 0.29s; } .a5 { animation-delay: 0.37s; }
   .track-fill { animation: fillBar 1.1s cubic-bezier(0.16,1,0.3,1) forwards; }
+
+  /* ===== 단일 폰 목업: 탭 전환 (디자인 변경 없음) ===== */
+  body { align-items: center; }
+  .screen-label { display: none; }
+  .device { display: none; }
+  .device.active { display: block; }
+  .nav-item { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .bc-cta, .new-btn { cursor: pointer; }
+  @media (max-width: 430px){
+    body { padding: 0; background: #000; }
+    .device { width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; box-shadow: none; }
+  }
 </style>
 </head>
 <body>
@@ -353,6 +365,12 @@
         <div class="sync-chip">Garmin</div>
       </div>
     </div>
+    <div class="nav">
+      <div class="nav-item"><svg class="ico" viewBox="0 0 24 24"><path d="M3 11l9-8l9 8M5 10v10h14V10"/></svg><div class="nav-label">HOME</div></div>
+      <div class="nav-item on"><svg class="ico" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><div class="nav-label">NEW</div></div>
+      <div class="nav-item"><svg class="ico" viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m5 14v-7m5 7V11"/></svg><div class="nav-label">BATTLE</div></div>
+      <div class="nav-item"><svg class="ico" viewBox="0 0 24 24"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><div class="nav-label">RECORD</div></div>
+    </div>
   </div>
 </div>
 
@@ -430,10 +448,11 @@
   <div class="view">
     <div class="body">
       <div class="statusbar"><span>9:41</span><div class="dots"><span>5G</span><span>100%</span></div></div>
-      <div class="hdr anim a1">
-        <div class="logo" style="font-size:20px">전적</div>
+      <div class="form-hdr anim a1">
+        <div class="hdr-ic back-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6l6-6"/></svg></div>
         <div class="hdr-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
       </div>
+      <div class="form-title-big anim a1">전적</div>
       <div class="rh anim a2">
         <div class="rh-glow"></div>
         <div class="rh-label">나 VS 라이벌 K · 통산</div>
@@ -488,5 +507,40 @@
   </div>
 </div>
 
+
+<script>
+(function(){
+  var devices = Array.prototype.slice.call(document.querySelectorAll('.device'));
+  function show(i){
+    devices.forEach(function(d,j){ d.classList.toggle('active', j===i); });
+    var b = devices[i] && devices[i].querySelector('.body');
+    if(b) b.scrollTop = 0;
+  }
+  // 각 폰의 하단 탭(HOME/NEW/BATTLE/RECORD) 순서대로 0~3 화면에 연결
+  devices.forEach(function(dev){
+    dev.querySelectorAll('.nav-item').forEach(function(item, idx){
+      item.addEventListener('click', function(){ show(idx); });
+    });
+  });
+  // 화면 안의 버튼들도 실제 앱처럼 연동
+  document.querySelectorAll('.bc-cta').forEach(function(b){ b.addEventListener('click', function(){ show(2); }); });
+  document.querySelectorAll('.new-btn').forEach(function(b){ b.addEventListener('click', function(){ show(1); }); });
+  // 백버튼(메인 제외 전 페이지) → 홈으로
+  document.querySelectorAll('.form-hdr .hdr-ic, .dh-back, .back-btn').forEach(function(b){
+    b.style.cursor = 'pointer';
+    b.addEventListener('click', function(){ show(0); });
+  });
+  // 메인 카드 링크
+  document.querySelectorAll('.battle-card').forEach(function(b){
+    b.style.cursor = 'pointer';
+    b.addEventListener('click', function(){ show(2); });   // 자전거 거리 대결 → BATTLE
+  });
+  document.querySelectorAll('.rec-strip').forEach(function(b){
+    b.style.cursor = 'pointer';
+    b.addEventListener('click', function(){ show(3); });   // 라이벌 K 상대 전적 → RECORD
+  });
+  show(0);
+})();
+</script>
 </body>
 </html>
