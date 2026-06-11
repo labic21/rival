@@ -310,8 +310,8 @@
     <div class="body">
       <div class="statusbar"><span>9:41</span><div class="dots"><span>5G</span><span>100%</span></div></div>
       <div class="form-hdr anim a1">
-        <div class="hdr-ic"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6l6-6"/></svg></div>
-        <div style="width:42px"></div>
+        <div class="hdr-ic back-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6l6-6"/></svg></div>
+        <div class="hdr-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/><path d="M18 9l2 2l3-3"/></svg></div>
       </div>
       <div class="form-title-big anim a1">새 대결</div>
       <div class="form-sub anim a2">라이벌에게 도전장을 보내세요</div>
@@ -384,8 +384,8 @@
         <div class="detail-hero-glow"></div>
         <div class="statusbar"><span>9:41</span><div class="dots"><span>5G</span><span>100%</span></div></div>
         <div class="dh-top anim a1">
-          <div class="dh-back"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6l6-6"/></svg></div>
-          <div style="width:42px"></div>
+          <div class="hdr-ic back-btn"><svg class="ico" viewBox="0 0 24 24"><path d="M15 18l-6-6l6-6"/></svg></div>
+          <div class="hdr-ic"><svg class="ico" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 12 0v1"/><path d="M18 9l2 2l3-3"/></svg></div>
         </div>
         <div class="dh-type anim a1">자전거 거리 대결 · LIVE</div>
         <div class="dh-title anim a2">이번 주말 100KM</div>
@@ -526,7 +526,7 @@
   document.querySelectorAll('.bc-cta').forEach(function(b){ b.addEventListener('click', function(){ show(2); }); });
   document.querySelectorAll('.new-btn').forEach(function(b){ b.addEventListener('click', function(){ show(1); }); });
   // 백버튼(메인 제외 전 페이지) → 홈으로
-  document.querySelectorAll('.form-hdr .hdr-ic, .dh-back, .back-btn').forEach(function(b){
+  document.querySelectorAll('.back-btn').forEach(function(b){
     b.style.cursor = 'pointer';
     b.addEventListener('click', function(){ show(0); });
   });
