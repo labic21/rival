@@ -229,6 +229,18 @@
     body { padding: 0; background: #000; }
     .device { width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; box-shadow: none; }
   }
+
+/* ===== 포트폴리오 좌우 네비게이션 ===== */
+.pf-nav{position:fixed;top:50%;transform:translateY(-50%);z-index:600;display:flex;flex-direction:column;align-items:center;gap:9px;text-decoration:none;-webkit-tap-highlight-color:transparent}
+.pf-prev{left:34px}
+.pf-next{right:34px}
+.pf-arrow{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid #3D4D69;display:flex;align-items:center;justify-content:center;font-size:34px;line-height:0;color:#C2CCD8;transition:all .25s cubic-bezier(.2,.7,.2,1);backdrop-filter:blur(4px);padding-bottom:7px}
+.pf-nav:hover .pf-arrow{background:rgba(255,255,255,0.14);color:#F1F5F9;border-color:#6B7A92;transform:scale(1.06)}
+.pf-cap{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#5A6779;font-family:'Archivo',sans-serif;font-weight:700}
+.pf-label{font-size:13px;letter-spacing:.01em;color:#8A97A8;font-weight:600;white-space:nowrap}
+.pf-nav:hover .pf-label{color:#F1F5F9}
+.pf-txt{display:flex;flex-direction:column;align-items:center;gap:1px}
+@media(max-width:920px){.pf-prev{left:14px}.pf-next{right:14px}.pf-arrow{width:46px;height:46px;font-size:28px;padding-bottom:5px}.pf-label,.pf-cap{display:none}}
 </style>
 </head>
 <body>
@@ -542,5 +554,14 @@
   show(0);
 })();
 </script>
+
+<a class="pf-nav pf-prev" href="https://labic21.github.io/remain" aria-label="이전 작업: Remain">
+  <span class="pf-arrow">‹</span>
+  <span class="pf-txt"><span class="pf-cap">Prev</span><span class="pf-label">Remain</span></span>
+</a>
+<a class="pf-nav pf-next" href="https://labic21.github.io/happywork/" aria-label="다음 작업: 해피워크">
+  <span class="pf-arrow">›</span>
+  <span class="pf-txt"><span class="pf-cap">Next</span><span class="pf-label">해피워크</span></span>
+</a>
 </body>
 </html>
